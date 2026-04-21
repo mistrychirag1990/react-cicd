@@ -1,0 +1,28 @@
+name: Distdeploy
+on : [push,workflow_dispatch]
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get code
+              uses: actions/checkout@v6
+
+            - name: install node 20
+              uses: actions/checkout@v6
+              with:
+                node-version: 20
+
+            - name: print node version
+              run: node -v
+
+            - name: install dependecies
+              run: npm ci
+
+            - name: run test
+              run: npm run test
+
+                   
+              
+
+        
+
