@@ -21,6 +21,25 @@ jobs:
             - name: run test
               run: npm run test
 
+    deploy:
+        needs: test
+        runs-on: ubunutu:latest
+        steps:
+            - name: get code
+              uses: actions/checkout@v6
+
+            - name: node install 20
+              uses: actions/checkout@v6
+              with:
+                node-version: 20
+
+            - name : insall dependecies
+              run: npm ci
+
+            - name: build project
+              run: npm run build
+          
+
                    
               
 
