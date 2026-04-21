@@ -23,7 +23,7 @@ jobs:
 
     deploy:
         needs: test
-        runs-on: ubunutu-latest
+        runs-on: ubuntu-latest
         steps:
             - name: get code
               uses: actions/checkout@v6
