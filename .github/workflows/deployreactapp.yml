@@ -1,0 +1,82 @@
+name: Dieploy react to pages
+on : 
+    push:
+        branches:
+            - main
+            - 'feature/**'
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get code
+              uses: actions/checkout@v6
+
+            - name: install node 20
+              uses: actions/checkout@v6
+              with:
+                node-version: 20
+
+            - name: print node version
+              run: node -v
+
+            - name: cache dependecies
+              uses: actions/cache@v5
+              with: 
+                path: ~/.npm
+                key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+              
+
+            - name: install dependecies
+              run: npm ci
+
+            - name: run test
+              run: npm run test
+
+    build:
+        needs: test
+        runs-on: ubuntu-latest
+        steps:
+            - name: get code
+              uses: actions/checkout@v6
+
+            - name: node install 20
+              uses: actions/checkout@v6
+              with:
+                node-version: 20
+
+            - name: cache dependecies
+              uses: actions/cache@v5
+              with: 
+                path: ~/.npm
+                key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+            - name : insall dependecies
+              run: npm ci
+
+            - name: build project
+              run: npm run build
+
+            - name: upload dist artifact
+              uses: actions/uupload-pages-artifact@v5
+              with:
+                name: github-pages
+                path: dist
+
+    Deploy:
+        needs: build
+        runs-on: ubuntu-lates
+
+        permissions:
+            pages: write
+            id-token: write
+
+        environment:
+           - name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+
+        steps:
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
