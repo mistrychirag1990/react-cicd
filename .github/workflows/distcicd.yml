@@ -2,8 +2,7 @@ name: Distdeploy
 on : 
     push:
         branches:
-            - main
-            - 'feature/**'
+          - 'feature/**'
 jobs:
     test:
         runs-on: ubuntu-latest
