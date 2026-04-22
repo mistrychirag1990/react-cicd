@@ -1,5 +1,5 @@
 name: Distdeploy
-on : 
+#on : 
     push:
         branches:
           - 'feature/**'

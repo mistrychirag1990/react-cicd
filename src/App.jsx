@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <h1>Github Actions</h1>
-      <h2>Complete course with 2 projects & Deploy on git static page</h2>
+      <h2>Complete course with 2 projects & Deploy on git static page!!</h2>
     </>
   )
 }
