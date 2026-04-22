@@ -1,8 +1,6 @@
 name: Distdeploy
-#on : 
-    push:
-        branches:
-          - 'feature/**'
+on : 
+    workflow_dispatch:
 jobs:
     test:
         runs-on: ubuntu-latest
