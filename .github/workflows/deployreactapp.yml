@@ -4,6 +4,13 @@ on :
         branches:
             - main
             - 'feature/**'
+        paths:
+            - 'src/**'
+            - 'package.json'
+            - 'vite.config.js'
+            - 'App.jsx'
+            
+            
 jobs:
     test:
         runs-on: ubuntu-latest
